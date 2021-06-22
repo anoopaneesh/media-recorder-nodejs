@@ -17,8 +17,13 @@ app.get('/', (req, res) => {
 })
 
 app.post('/convertTomp4', async (req, res) => {
+  console.log('Reached here at uploading')
   let file = req.files.file
-  await file.mv('./videos/test.mp4')
+  try{
+    await file.mv('./videos/test.mp4')
+  }catch(err){
+    console.log(err)
+  }
   const hbjs = require('handbrake-js')
 
   hbjs
