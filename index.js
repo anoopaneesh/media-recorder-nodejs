@@ -20,9 +20,13 @@ app.post('/convertTomp4', async (req, res) => {
   const hbjs = require('handbrake-js')
   console.log('Reached here at uploading')
   let file = req.files.file
-  file.mv('./videos/test.mp4').then(() => {
+  if(!file){
+    console.log('file not uploaded')
+  }
+  file.mv(`${__dirname}/videos/test.mp4`).then((err) => {
+    if(err) console.log(err,"from fileuplaod")
     hbjs
-      .spawn({ input: './videos/test.mp4', output: './videos/converted.mp4' })
+      .spawn({ input: `${__dirname}/videos/test.mp4`, output: `${__dirname}/videos/converted.mp4` })
       .on('error', (err) => {
         console.log('download error',err)
       })
