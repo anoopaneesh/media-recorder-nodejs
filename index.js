@@ -36,8 +36,8 @@ app.post('/convertTomp4', async (req, res) => {
     .on('complete', () => {
       res.json({status:true})
     })
-    .on('error', () => {
-      res.statusCode(400)
+    .on('error', (err) => {
+        console.log(err)
       res.json({ status: false })
     })
 })
