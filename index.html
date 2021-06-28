@@ -47,15 +47,17 @@
     	    let formData = new FormData()
             let videoFile = new File([video_local],'test.mp4')
             formData.append('file',videoFile)
+            status.textContent = 'Saving file....'
             fetch('/convertTomp4',{
                 method:'POST',
                 body:formData,
             }).then((response)=>response.json()).then((data)=>{
                 if(data.status){
-                    let a = document.createElement('a')
-                    a.href="/converted.mp4"
-                    a.download = 'recorded.mp4'
-                    a.click()
+                    status.textContent = "saved"
+                    // let a = document.createElement('a')
+                    // a.href="/converted.mp4"
+                    // a.download = 'recorded.mp4'
+                    // a.click()
                 }
             })
         });
